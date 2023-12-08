@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  db:
+    restart: unless-stopped
+    image: postgres:${PG_VERSION}
+    env_file:
+      - .env
+      - .env.local
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/pg/data:/var/lib/postgresql/data
+      - ./data/pg/conf:/etc/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
