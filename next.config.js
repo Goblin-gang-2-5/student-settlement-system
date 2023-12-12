@@ -3,7 +3,8 @@ const nextConfig = {
     webpack: (config, {isServer}) => {
         if (!isServer) {
             config.resolve.fallback = {
-                bcrypt: false
+                bcrypt: false,
+                prisma: false
             }
         }
         return config

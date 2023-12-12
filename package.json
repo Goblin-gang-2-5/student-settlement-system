@@ -9,24 +9,29 @@
     "lint": "next lint",
     "format-db-scheme": "prisma format",
     "prisma-dev-migration": "dotenv -e .env.local prisma migrate dev",
-    "prisma-studio": "dotenv -e .env.local pnpm prisma studio",
+    "prisma-studio": "dotenv -e .env.local cross-env BROWSER=none pnpm prisma studio",
     "generate-prisma-client": "pnpm prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.7.0",
+    "@reduxjs/toolkit": "^2.0.1",
     "antd": "^5.12.1",
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "next": "14.0.4",
-    "next-auth": "^4.24.5",
+    "next-auth": "5.0.0-beta.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "react-redux": "^9.0.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-redux": "^7.1.32",
+    "cross-env": "^7.0.3",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
