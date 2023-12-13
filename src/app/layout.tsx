@@ -4,6 +4,7 @@ import './globals.css'
 import React from "react";
 import ReduxCustomProvider from "@/components/providers/ReduxCustomProvider";
 import ReactQueryProvider from "@/components/providers/ReactQueryProvider";
+import Header from "@/components/UI/header/Header";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxCustomProvider>
           <ReactQueryProvider>
+            <Header/>
             {children}
           </ReactQueryProvider>
         </ReduxCustomProvider>
