@@ -1,6 +1,17 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 secret info in .env.local file
+example of .env.local
+```dotenv
+POSTGRES_PASSWORD=
+PG_LINK=
+NEXTAUTH_SECRET=
+```
+
+gen ACCESS_TOKEN
+```
+openssl rand -base64 32
+```
 
 ## Getting Started
 
