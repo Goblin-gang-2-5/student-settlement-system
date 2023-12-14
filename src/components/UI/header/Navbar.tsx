@@ -3,14 +3,22 @@ import {Avatar, Button, Dropdown, Flex, MenuProps} from "antd";
 import cl from "./header.module.css"
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {LogoutOutlined} from "@ant-design/icons";
+import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {logOut} from "@/actions/server/authenticate";
+import {usePathname, useRouter} from "next/navigation";
 export default function Navbar(){
     const [showInput, setShowInput] = useState(true)
     const [user, setUser] = useState<{email:string, name: string, avatarUrl: string, createAt: Date}|null>(null)
+    const router = useRouter()
     const items:MenuProps["items"] = [
         {
             key: "u0",
+            label: "Профиль",
+            icon: <UserOutlined />,
+            onClick: () => router.replace("/dashboard/profile")
+        },
+        {
+            key: "u1",
             label: "Выйти",
             danger: true,
             icon: <LogoutOutlined />,
@@ -19,8 +27,9 @@ export default function Navbar(){
             }
         }
     ]
+    const pathname = usePathname()
     useEffect(() => {
-        if (location?.pathname === "/login") setShowInput(false)
+        if (pathname === "/login") setShowInput(false)
         else {
             axios.get("/api/users/me").then(res => {
                 console.log(res)
@@ -29,7 +38,7 @@ export default function Navbar(){
             )
 
         }
-    }, [])
+    }, [pathname])
     return (
         <Flex justify={"space-between"} align={"center"} style={{minHeight: "100%", paddingInline: "1em"}}>
 
