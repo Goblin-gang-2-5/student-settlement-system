@@ -13,6 +13,7 @@
     "generate-prisma-client": "pnpm prisma generate"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@prisma/client": "^5.7.0",
     "@reduxjs/toolkit": "^2.0.1",
     "antd": "^5.12.1",
@@ -23,7 +24,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-query": "^3.39.3",
-    "react-redux": "^9.0.4"
+    "react-redux": "^9.0.4",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

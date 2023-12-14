@@ -5,7 +5,6 @@ const userSlice = createSlice(({
     initialState: {
         email: "",
         name: "",
-        token: "",
         avatarUrl: "",
         createAt: new Date()
     },
@@ -13,7 +12,6 @@ const userSlice = createSlice(({
         setUser(state, action){
             state.name = action.payload.name
             state.email = action.payload.email
-            state.token = action.payload.token
             state.avatarUrl = action.payload.avatarUrl
             state.createAt = action.payload.createAt
 
