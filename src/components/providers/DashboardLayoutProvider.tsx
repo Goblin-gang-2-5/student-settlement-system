@@ -1,33 +1,73 @@
 "use client";
-import React from "react";
-import {Button, Col, Dropdown, Flex, Row} from "antd";
+import React, {useEffect, useState} from "react";
+import {Col, Menu, MenuProps, Row} from "antd";
 import Image from "next/image";
-import Link from "next/link";
+import {useRouter} from "next/navigation";
 
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem(
+    label: React.ReactNode,
+    key: React.Key,
+    icon?: React.ReactNode,
+    children?: MenuItem[],
+    type?: 'group',
+): MenuItem {
+    return {
+        key,
+        icon,
+        children,
+        label,
+        type,
+    } as MenuItem;
+}
 export default function DashboardLayoutProvider({children}:{children:React.ReactNode}){
+    const items:MenuProps["items"] = [
+        getItem("Карта", "1", <Image src={"/assets/map.png"} height={20} width={20} alt={'Карта'}/>),
+        getItem("Управление", "2",  <Image src={"/assets/admin.png"} height={20} width={20} alt={'Добавление Администратора'}/>),
+        getItem("Расселение студентов", '3', <Image src={"/assets/students.png"} height={20} width={20} alt={'Расселение студентов'}/>)
+    ]
+    const router = useRouter()
+    const onClick: MenuProps['onClick'] = (e) => {
+        switch (e.key){
+            case "1":
+                router.replace("/dashboard")
+                break
+            case "2":
+                router.replace("/dashboard/management")
+                break
+            case "3":
+                router.replace("/dashboard/students")
+        }
+    };
+    const [defOpen, setDefOpen] = useState("1")
+    useEffect(() => {
+        if (location?.pathname){
+            switch (location.pathname){
+                case "/dashboard/":
+                    setDefOpen('1')
+                    break
+                case "/dashboard/management":
+                    setDefOpen('2')
+                    break
+                case "/dashboard/students":
+                    setDefOpen('3')
+                    break
+                default:
+                    setDefOpen('1')
+                    break
+            }
+        }
+    }, [])
     return (
-        <Row>
+        <Row style={{minHeight: "100%"}}>
             <Col flex={"15%"} style={{boxShadow: "4px 0 4px 0 rgba(0, 0, 0, 0.25)", minHeight: "91vh"}}>
-                <Flex vertical gap={'2em'} style={{fontWeight: 700, paddingInline: "2em", paddingBlock: "2em"}}>
-                    <Link href={"/dashboard"} style={{textDecoration: "none", color: "black"}}>
-                        <div style={{display: "flex", alignContent: "center", gap: "1em"}}>
-                            <Image src={"/assets/map.png"} height={20} width={20} alt={'Карта'}/>
-                            <span>Карта</span>
-                        </div>
-                    </Link>
-                    <Link href={"/admins"} style={{textDecoration: "none", color: "black"}}>
-                        <div style={{display: "flex", alignContent: "center", gap: "1em"}}>
-                            <Image src={"/assets/admin.png"} height={20} width={20} alt={'Добавление Администратора'}/>
-                            <span>Добавление администратора</span>
-                        </div>
-                    </Link>
-                    <Link href={"/students"} style={{textDecoration: "none", color: "black"}}>
-                        <div style={{display: "flex", alignContent: "center", gap: "1em"}}>
-                            <Image src={"/assets/students.png"} height={20} width={20} alt={'Расселение студентов'}/>
-                            <span>Расселение студентов</span>
-                        </div>
-                    </Link>
-                </Flex>
+                <Menu
+                    onClick={onClick}
+                    defaultSelectedKeys={[defOpen]}
+                    mode={"inline"}
+                    items={items}
+                />
             </Col>
             <Col flex={"auto"} style={{paddingBlock: '2em', paddingInline: "1em", backgroundColor: "#F5F5F5", minHeight: "100%"}}>
                 {children}

@@ -13,6 +13,7 @@
     "generate-prisma-client": "pnpm prisma generate"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.1",
     "@ant-design/icons": "^5.2.6",
     "@prisma/client": "^5.7.0",
     "@reduxjs/toolkit": "^2.0.1",
