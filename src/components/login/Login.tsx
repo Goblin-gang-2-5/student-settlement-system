@@ -1,7 +1,7 @@
 "use client"
 import {Button, Flex, Form, Input, Typography} from "antd";
 import Image from "next/image";
-import {authenticate} from "@/actions/authenticate";
+import {authenticate} from "@/actions/server/authenticate";
 
 export default function Login(){
     const onFinish = async (e:{email:string, password:string}) => {

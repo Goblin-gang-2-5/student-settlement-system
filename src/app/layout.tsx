@@ -4,9 +4,11 @@ import './globals.css'
 import React from "react";
 import ReduxCustomProvider from "@/components/providers/ReduxCustomProvider";
 import ReactQueryProvider from "@/components/providers/ReactQueryProvider";
-import Header from "@/components/UI/header/Header";
+import Navbar from "@/components/UI/header/Navbar";
 import SessionCustomProvider from "@/components/providers/SessionProvider";
 import {auth} from "@/auth";
+import Header from "@/components/UI/header/Header";
+import StyledComponentsRegistry from "@/lib/AntdRegistry";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,14 +26,18 @@ export default async function RootLayout({
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <ReduxCustomProvider>
-          <ReactQueryProvider>
-            <SessionCustomProvider session={session}>
-              <Header/>
-              {children}
-            </SessionCustomProvider>
-          </ReactQueryProvider>
-        </ReduxCustomProvider>
+          <StyledComponentsRegistry>
+            <ReduxCustomProvider>
+              <ReactQueryProvider>
+                <SessionCustomProvider session={session}>
+                  <Header>
+                    <Navbar/>
+                  </Header>
+                  {children}
+                </SessionCustomProvider>
+              </ReactQueryProvider>
+            </ReduxCustomProvider>
+          </StyledComponentsRegistry>
       </body>
     </html>
   )

@@ -1,6 +1,3 @@
 .room {
     fill: #dadada
 }
-.room:active {
-    fill: red;
-}

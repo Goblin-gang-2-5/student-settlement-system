@@ -10,7 +10,7 @@ export const GET = auth(async function GET(req){
             }
         })
         if (user) {
-            return NextResponse.json({email: user.email, name: user.name, avatarUrl: user.avatarUrl, createAt: user.createAt})
+            return NextResponse.json({email: user.email, name: user.name, avatarUrl: user.avatarUrl, createAt: user.createAt, role: user.role})
         }
         return NextResponse.json({message: 'Not found'}, {status: 404})
     }
