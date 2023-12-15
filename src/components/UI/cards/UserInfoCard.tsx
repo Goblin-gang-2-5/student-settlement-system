@@ -19,8 +19,7 @@ export default function UserInfoCard({user}:{user: {
             fontWeight: 700,
             backgroundColor: "white",
             boxShadow: "-4px 4px 4px 0 rgba(0, 0, 0, 0.25)",
-            minWidth: "100%",
-            maxWidth: "100%"
+            minWidth: "50%"
         }}>
             <Flex vertical>
                 <Flex vertical>
