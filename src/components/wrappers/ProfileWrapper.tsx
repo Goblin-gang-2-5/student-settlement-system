@@ -21,11 +21,11 @@ export default function ProfileWrapper(){
     return (
         <div>
             {
-                user? <Flex style={{marginBlock: "2em", minWidth: "100%", maxWidth: "100%"}} gap={"2em"}>
+                user? <Flex style={{marginBlock: "2em", maxWidth: "100%"}} gap={"2em"}>
                     <UserMainCard user={user}/>
                     <UserInfoCard user={user}/>
                 </Flex>
-                    : <Flex style={{marginBlock: "2em", minWidth: "100%", maxWidth: "100%"}} gap={"2em"}>
+                    : <Flex style={{marginBlock: "2em", minWidth: "60%", maxWidth: "60%"}} gap={"2em"}>
                         <Skeleton.Image style={{height: 550, width: 550}} active/>
                         <Skeleton active/>
                     </Flex>
