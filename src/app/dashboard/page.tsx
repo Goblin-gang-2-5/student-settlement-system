@@ -7,6 +7,8 @@ export default async function Dashboard(){
     const session = await auth()
     if (!session) redirect("/login")
     return(
-            <></>
+            <>
+                <Map/>
+            </>
     )
 }

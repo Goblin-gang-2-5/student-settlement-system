@@ -3,6 +3,9 @@ import React, {useEffect, useState} from "react";
 import {Col, Menu, MenuProps, Row} from "antd";
 import Image from "next/image";
 import {usePathname, useRouter} from "next/navigation";
+import {getCurrentUser} from "@/actions/client/fetcher";
+import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks";
+import {setUserData} from "@/store/slices/userSlice";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -61,6 +64,18 @@ export default function DashboardLayoutProvider({children}:{children:React.React
             }
         }
     }, [pathName])
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state => state.user.user)
+    useEffect(() => {
+        if (!user || !user.email) {
+            getCurrentUser().then(user => {
+                    console.log(user)
+                    dispatch(setUserData(user))
+                }
+            )
+        }
+
+    }, [])
     return (
         <Row style={{minHeight: "100%"}}>
             <Col flex={"15%"} style={{boxShadow: "4px 0 4px 0 rgba(0, 0, 0, 0.25)", minHeight: "91vh"}}>
