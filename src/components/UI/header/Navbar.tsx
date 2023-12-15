@@ -2,13 +2,21 @@
 import {Avatar, Button, Dropdown, Flex, MenuProps} from "antd";
 import cl from "./header.module.css"
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {logOut} from "@/actions/server/authenticate";
 import {usePathname, useRouter} from "next/navigation";
+import {getCurrentUser} from "@/actions/client/fetcher";
+import {useAppDispatch} from "@/hooks/storeHooks";
+
 export default function Navbar(){
     const [showInput, setShowInput] = useState(true)
-    const [user, setUser] = useState<{email:string, name: string, avatarUrl: string, createAt: Date}|null>(null)
+    const [user, setUser] = useState<{
+        name: string,
+        email: string,
+        avatarUrl: string,
+        createdAt: Date,
+        role: "user"|"admin"
+    }|null>(null)
     const router = useRouter()
     const items:MenuProps["items"] = [
         {
@@ -28,12 +36,12 @@ export default function Navbar(){
         }
     ]
     const pathname = usePathname()
+    const dispatch = useAppDispatch()
     useEffect(() => {
         if (pathname === "/login") setShowInput(false)
         else {
-            axios.get("/api/users/me").then(res => {
-                console.log(res)
-                setUser(res.data)
+            getCurrentUser().then(user => {
+                    setUser(user)
                 }
             )
 

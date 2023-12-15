@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from "react";
 import {Col, Menu, MenuProps, Row} from "antd";
 import Image from "next/image";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -28,6 +28,7 @@ export default function DashboardLayoutProvider({children}:{children:React.React
         getItem("Расселение студентов", '3', <Image src={"/assets/students.png"} height={20} width={20} alt={'Расселение студентов'}/>)
     ]
     const router = useRouter()
+    const pathName = usePathname()
     const onClick: MenuProps['onClick'] = (e) => {
         switch (e.key){
             case "1":
@@ -42,8 +43,9 @@ export default function DashboardLayoutProvider({children}:{children:React.React
     };
     const [defOpen, setDefOpen] = useState("1")
     useEffect(() => {
-        if (location?.pathname){
-            switch (location.pathname){
+        console.log(pathName)
+        if (pathName){
+            switch (pathName){
                 case "/dashboard/":
                     setDefOpen('1')
                     break
@@ -58,7 +60,7 @@ export default function DashboardLayoutProvider({children}:{children:React.React
                     break
             }
         }
-    }, [])
+    }, [pathName])
     return (
         <Row style={{minHeight: "100%"}}>
             <Col flex={"15%"} style={{boxShadow: "4px 0 4px 0 rgba(0, 0, 0, 0.25)", minHeight: "91vh"}}>
